@@ -6,18 +6,25 @@ using VRC.Udon;
 
 public class DiceRoll : UdonSharpBehaviour
 {
-    public float rollForce = 20f;
+    public float rollForce = 10f;
     public Transform[] diceFaces;
 
     private Rigidbody rb;
     public void Start()
     {
-        rb = GetComponent<Rigidbody>();
         Debug.Log("DiceRoll script started");
-        rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX;
-        //Rotate in random directions until interaction
-        RollDice();
 
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints.FreezePosition;
+        }
+
+        RollDice();
     }
 
     public override void Interact()
@@ -25,6 +32,8 @@ public class DiceRoll : UdonSharpBehaviour
         //freeze dice rotation and position at the closest face
         rb.constraints = RigidbodyConstraints.None;
         rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
+        Vector3 randomTorque = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * rollForce;
+        rb.AddTorque(randomTorque, ForceMode.Impulse);
         Vector3 upwardsForce = Vector3.up * 3f;
         rb.AddForce(upwardsForce, ForceMode.Impulse);
     }
@@ -32,7 +41,10 @@ public class DiceRoll : UdonSharpBehaviour
     public void Update(){
         if(rb.IsSleeping()){
             CheckDiceResult();
-            rb.useGravity = false;
+        }
+        // if on ground, unfreeze position
+        if(rb.position.y < 0.1f){
+            rb.constraints = RigidbodyConstraints.None;
         }
     }
 

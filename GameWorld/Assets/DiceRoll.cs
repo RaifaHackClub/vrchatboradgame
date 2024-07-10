@@ -1,4 +1,4 @@
-﻿
+﻿ 
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -6,7 +6,7 @@ using VRC.Udon;
 
 public class DiceRoll : UdonSharpBehaviour
 {
-    public float rollForce = 10f;
+    public float rollForce = 20f;
     public Transform[] diceFaces;
 
     private Rigidbody rb;
@@ -32,6 +32,7 @@ public class DiceRoll : UdonSharpBehaviour
     public void Update(){
         if(rb.IsSleeping()){
             CheckDiceResult();
+            rb.useGravity = false;
         }
     }
 
@@ -55,7 +56,7 @@ public class DiceRoll : UdonSharpBehaviour
 
         if (upFace != null)
         {
-            Debug.Log("Dice landed on face: " + upFace.name);
+            //Debug.Log("Dice landed on face: " + upFace.name);
         }
     }
 }

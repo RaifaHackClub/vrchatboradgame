@@ -5,50 +5,28 @@ using VRC.Udon;
 
 public class Archer : UdonSharpBehaviour
 {
-    public int currentHealth;
-    public int attack;
-    public int defense;
-    public double attackSpeed;
+    public int health;
+    public int damage;
+    public int range;
 
     void Start()
     {
-        currentHealth = 80;
-        attack = 20;
-        defense = 5;
-        attackSpeed = 2;
+        health = 6;
+        damage = 1;
+        range = 3;
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        if (currentHealth < 0) currentHealth = 0;
+        health -= damage;
+        if (health < 0) health = 0;
         // Add additional logic like checking for death here
     }
 
     public void Attack(Archer target)
     {
-        int damage = attack - target.defense;
+        int damage = this.damage - target.defense;
         if (damage < 0) damage = 0;
         target.TakeDamage(damage);
-    }
-
-    public void UpgradeHealth(int value)
-    {
-        currentHealth += value;
-    }
-
-    public void UpgradeAttack(int value)
-    {
-        attack += value;
-    }
-
-    public void UpgradeDefense(int value)
-    {
-        defense += value;
-    }
-
-    public void UpgradeAttackSpeed(int value)
-    {
-        attackSpeed += value;
     }
 }

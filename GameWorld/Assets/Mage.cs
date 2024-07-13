@@ -5,50 +5,28 @@ using VRC.Udon;
 
 public class Mage : UdonSharpBehaviour
 {
-    public int currentHealth;
-    public int attack;
-    public int defense;
-    public double attackSpeed;
+    public int health;
+    public int damage;
+    public int range;
 
     void Start()
     {
-        currentHealth = 60;
-        attack = 25;
-        defense = 3;
-        attackSpeed = 1.5;
+        health = 8;
+        damage = 3;
+        range = 2;
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        if (currentHealth < 0) currentHealth = 0;
+        health -= damage;
+        if (health < 0) health = 0;
         // Add additional logic like checking for death here
     }
 
     public void Attack(Mage target)
     {
-        int damage = attack - target.defense;
+        int damage = this.damage - target.defense;
         if (damage < 0) damage = 0;
         target.TakeDamage(damage);
-    }
-
-    public void UpgradeHealth(int value)
-    {
-        currentHealth += value;
-    }
-
-    public void UpgradeAttack(int value)
-    {
-        attack += value;
-    }
-
-    public void UpgradeDefense(int value)
-    {
-        defense += value;
-    }
-
-    public void UpgradeAttackSpeed(int value)
-    {
-        attackSpeed += value;
     }
 }

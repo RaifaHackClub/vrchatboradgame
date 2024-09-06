@@ -4,8 +4,10 @@ This repository contains the script files for a VRChat board game world currentl
 
 ### Setup Instructions
 Clone the repository:
-git clone https://github.com/yourusername/vrchatboradgame.git
+```
+git clone https://github.com/RaifaHackClub/vrchatboradgame
 cd vrchatboradgame
+```
 
 Run with VRChat Creator Companion.
 

@@ -1,4 +1,4 @@
-#VRChat Board Game
+# VRChat Board Game
 This repository contains the script files for a VRChat board game world currently in development. Please note that tiles and characters are not included and will need to be added locally.
 ![image](https://github.com/user-attachments/assets/1f83a7a0-8e85-4804-bc2c-411ecc288b13)
 
